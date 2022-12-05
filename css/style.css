@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:700|Roboto:100,300,700");
+
+* {
+  font-family: "Roboto";
+  font-weight: 300;
+}
+
+body {
+  background-color: #476e61;
+  margin: 0;
+  padding: 0;
+}
+
+.game-link a,
+h1,
+h2,
+p {
+  text-align: center;
+  color: #ffd75c;
+}
+
+h1 {
+  font-size: 100px;
+  font-weight: 300;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ffd75c;
+  width: 55%;
+  margin: 20px auto;
+}
+
+.game-link button {
+  background-color: #476e61;
+  display: flex;
+  align-items: center;
+
+  margin: 50px auto;
+  padding: 15px 50px;
+
+  border: 3.5px solid #ffd75c;
+  border-radius: 10px;
+}
+
+a {
+  text-decoration: none;
+  letter-spacing: 5px;
+}
+
+/* tags in game.html */
+
+#container {
+    position: relative;
+  padding: 0;
+  margin: auto;
+  display: block;
+
+  width: 700px;
+  height: 250px;
+
+  border: 5px solid #ffd75c;
+  border-radius: 10px;
+
+  background-image: url(../img/background.jpg);
+  background-size: 700px 250px;
+}
+
+
+
+/* #yoshi {
+    width: 60px;
+    height: 60px;
+    background-image: url(../images/yoshi.jpg);
+    background-size: 60px 60px;
+    
+    position: absolute;
+    bottom: 25px;
+} 
+
+.animate {
+    animation: jump 0.2s linear;
+}
+
+@keyframes jump {
+    0% { top: 165px; }
+    30% { top: 100px; }
+    30% { top: 70px; }
+    70% { top: 100px; } 
+    100% { top: 165px; }
+} */
+
+
+
+/* #obstacles {
+    transition-property: left;
+    transition-duration: 2s;
+} */
+
+/* .score {
+  color: #f7f7f7;
+  text-align: center;
+
+  position: relative;
+  top: 5px;
+} */
