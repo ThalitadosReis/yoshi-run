@@ -75,24 +75,26 @@ ul li {
   border: 7px solid #43aa8b;
   border-radius: 15px;
 
-  background-image: url(/img/background.jpg);
+  background-image: url('/img/background.jpg');
   background-size: 700px 250px;
 }
 
 #time {
   color: #000814;
-  font-size: 25px;
+  font-size: 20px;
+  font-weight: 1000;
 
   position: absolute;
   top: 5px;
-  right: 15px;
+  left: 15px;
 }
 
 #score {
   color: #f6fff8;
-  font-size: 25px;
+  font-size: 20px;
+  font-weight: 900;
 
   position: absolute;
   top: 30px;
-  right: 15px;
+  left: 15px;
 }
