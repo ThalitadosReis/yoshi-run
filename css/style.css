@@ -12,6 +12,7 @@ body {
 }
 
 .game-link a,
+ul,
 h1,
 h2,
 p {
@@ -50,6 +51,13 @@ a {
   letter-spacing: 5px;
 }
 
+ul li {
+  color: #000814;
+  font-size: 20px;
+  text-transform: uppercase;
+  list-style: none;
+}
+
 /* tag container - the game */
 
 #container {
@@ -58,12 +66,33 @@ a {
   margin: auto;
   display: block;
 
+  overflow: hidden; 
+  /* to remove the overflow of the obstacle */
+
   width: 700px;
   height: 250px;
 
   border: 7px solid #43aa8b;
   border-radius: 15px;
 
-  background-image: url(../img/background.jpg);
+  background-image: url(/img/background.jpg);
   background-size: 700px 250px;
+}
+
+#time {
+  color: #000814;
+  font-size: 25px;
+
+  position: absolute;
+  top: 5px;
+  right: 15px;
+}
+
+#score {
+  color: #f6fff8;
+  font-size: 25px;
+
+  position: absolute;
+  top: 30px;
+  right: 15px;
 }
