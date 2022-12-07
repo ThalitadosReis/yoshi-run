@@ -2,17 +2,22 @@ class Game {
   constructor() {
     this.player = null;
     this.obstacle = [];
+    this.randomObstacle = 1000;
   }
 
   start() {
     this.player = new Yoshi();
     this.control();
-
+    
     // create obstacle randomly
     setInterval(() => {
       const newObstacle = new Obstacle();
       this.obstacle.push(newObstacle);
-    }, 2000);
+    }, this.randomObstacle);
+
+    setTimeout(() => {
+      this.randomObstacle = Math.floor((Math.random() * 500) + 250)
+    }, 3500);
 
     // update obstacle
     setInterval(() => {
@@ -24,7 +29,7 @@ class Game {
     }, 15);
   }
 
-  control(e) {
+  control() {
     document.addEventListener("keydown", (e) => {
       if (e.code === "Space") {
         this.player.jump();
@@ -39,13 +44,12 @@ class Game {
       this.player.x < 65
     ) {
       alert('u dead');
-      console.log("u dead");
       // location.href = "gameover.html";
     }
   }
 
   removeObstacle(obsInstance) {
-    if (obsInstance.obsPosition <= 0) {
+    if (obsInstance.obsPosition <= 0 - obsInstance.width) {
       obsInstance.domElement.remove();
       this.obstacle.shift();
     }
@@ -92,12 +96,12 @@ class Yoshi {
           this.x -= 25;
           this.jumpTimer--;
           this.domElement.style.bottom = this.x + "px";
-        }, 15);
+        }, 25);
       }
       this.jumpTimer++;
       this.x += 25;
       this.domElement.style.bottom = this.x + "px";
-    }, 15);
+    }, 25);
   }
 }
 
@@ -108,7 +112,7 @@ class Obstacle {
     this.x = 25;
     this.r = 0;
 
-    this.obsPosition = 670;
+    this.obsPosition = 676; // container size less obstacle width
 
     this.domElement = null;
     this.createDomElement();
@@ -127,8 +131,6 @@ class Obstacle {
 
     const gameElement = document.getElementById("container");
     gameElement.appendChild(this.domElement);
-
-    this.randomObstacle = Math.floor(Math.random() * 4000) + 1;
   }
 
   slideLeft() {
@@ -139,3 +141,9 @@ class Obstacle {
 
 const game = new Game();
 game.start();
+
+// document.addEventListener("keydown", (e) => {
+//   if(e.code === "Enter"){
+//     game.start();
+//   }
+// });
