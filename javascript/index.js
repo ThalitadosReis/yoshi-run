@@ -1,59 +1,54 @@
 class Game {
   constructor() {
-    this.obstacle = [];
     this.player = null;
+    this.obstacle = [];
   }
 
   start() {
     this.player = new Yoshi();
     this.control();
 
-    // Math.random() * 2500;
-
     // create obstacle
     setInterval(() => {
       const newObstacle = new Obstacle();
       this.obstacle.push(newObstacle);
-    }, 3000);
+    }, 2000);
+
 
     // update obstacle
     setInterval(() => {
       this.obstacle.forEach((obsInstance) => {
-        // move obstacle
-        obsInstance.slideLeft();
-
-        // detect collision
-        this.detectCollision(obsInstance);
-
-        // revoming obstacle
-        this.removeObstacle(obsInstance);
+        obsInstance.slideLeft(); // move obstacle
+        this.detectCollision(obsInstance);  // detect collision
+        this.removeObstacle(obsInstance); // remove obstacle
       });
     }, 15);
   }
 
   control() {
     document.addEventListener("keydown", (e) => {
-      if (e.code === "Space") {
+      if (e.key === "Space") {
         this.player.jump();
       }
     });
   }
 
   detectCollision(obsInstance) {
-  //   if (
-
-  //   ){
-  //     console.log('u dead')
-  //     //location.href = "gameover.html";
-  //   }
+    if (
+      obsInstance.obsPosition > 0 && obsInstance.obsPosition < 60 && this.player.x < 60
+    ){
+      console.log('u dead')
+      // location.href = "gameover.html";
+    }
   }
 
   removeObstacle(obsInstance) {
-    if (obsInstance.r >= 680) {
+    if (obsInstance.obsPosition <= 0) {
       obsInstance.domElement.remove();
       this.obstacle.shift();
     }
   }
+
 }
 
 class Yoshi {
@@ -78,7 +73,7 @@ class Yoshi {
     this.domElement.style.bottom = this.x + "px";
     this.domElement.style.left = this.l + "px";
     this.domElement.style.position = "absolute";
-    this.domElement.style.backgroundImage = "url('../img/yoshi.jpg')";
+    this.domElement.style.backgroundImage = "url('img/yoshi.jpg')";
     this.domElement.style.backgroundSize = "60px 60px";
 
     const gameElement = document.getElementById("container");
@@ -94,13 +89,13 @@ class Yoshi {
             clearInterval(this.downTimerId);
             this.isJumping = false;
           }
-          this.x -= 15;
+          this.x -= 20;
           this.jumpTimer--;
           this.domElement.style.bottom = this.x + "px";
         }, 15);
       }
       this.jumpTimer++;
-      this.x += 15;
+      this.x += 20;
       this.domElement.style.bottom = this.x + "px";
     }, 15);
   }
@@ -110,8 +105,10 @@ class Obstacle {
   constructor() {
     this.width = 34;
     this.height = 55;
-    this.y = 168;
+    this.x = 25;
     this.r = 0;
+
+    this.obsPosition = 670;
 
     this.domElement = null;
     this.createDomElement();
@@ -122,10 +119,10 @@ class Obstacle {
     this.domElement.className = "obstacle";
     this.domElement.style.width = this.width + "px";
     this.domElement.style.height = this.height + "px";
-    this.domElement.style.top = this.y + "px";
+    this.domElement.style.bottom = this.x + "px";
     this.domElement.style.right = this.r + "px";
     this.domElement.style.position = "absolute";
-    this.domElement.style.backgroundImage = "url('../img/piranha.jpg')";
+    this.domElement.style.backgroundImage = "url('img/piranha.jpg')";
     this.domElement.style.backgroundSize = "33px 55px";
 
     const gameElement = document.getElementById("container");
@@ -133,8 +130,8 @@ class Obstacle {
   }
 
   slideLeft() {
-    this.r += 5;
-    this.domElement.style.right = this.r + "px";
+    this.obsPosition -= 5;
+    this.domElement.style.left = this.obsPosition + "px";
   }
 }
 const game = new Game();
