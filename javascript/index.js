@@ -7,19 +7,19 @@ class Game {
   start() {
     this.player = new Yoshi();
     this.control();
-
+    
     // create obstacle
+    // this.obsRandom = Math.random() ------ ;
     setInterval(() => {
       const newObstacle = new Obstacle();
       this.obstacle.push(newObstacle);
     }, 2000);
 
-
     // update obstacle
     setInterval(() => {
       this.obstacle.forEach((obsInstance) => {
         obsInstance.slideLeft(); // move obstacle
-        this.detectCollision(obsInstance);  // detect collision
+        this.detectCollision(obsInstance); // detect collision
         this.removeObstacle(obsInstance); // remove obstacle
       });
     }, 15);
@@ -27,7 +27,7 @@ class Game {
 
   control() {
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Space") {
+      if (e.code === "Space") {
         this.player.jump();
       }
     });
@@ -37,7 +37,7 @@ class Game {
     if (
       obsInstance.obsPosition > 0 && obsInstance.obsPosition < 60 && this.player.x < 60
     ){
-      console.log('u dead')
+      console.log('u dead');
       // location.href = "gameover.html";
     }
   }
@@ -58,7 +58,6 @@ class Yoshi {
     this.x = 25;
     this.l = 0;
 
-    this.isJumping = false;
     this.jumpTimer = 0;
 
     this.domElement = null;
