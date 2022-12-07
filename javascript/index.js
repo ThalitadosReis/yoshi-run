@@ -7,9 +7,8 @@ class Game {
   start() {
     this.player = new Yoshi();
     this.control();
-    
-    // create obstacle
-    // this.obsRandom = Math.random() ------ ;
+
+    // create obstacle randomly
     setInterval(() => {
       const newObstacle = new Obstacle();
       this.obstacle.push(newObstacle);
@@ -25,7 +24,7 @@ class Game {
     }, 15);
   }
 
-  control() {
+  control(e) {
     document.addEventListener("keydown", (e) => {
       if (e.code === "Space") {
         this.player.jump();
@@ -35,9 +34,12 @@ class Game {
 
   detectCollision(obsInstance) {
     if (
-      obsInstance.obsPosition > 0 && obsInstance.obsPosition < 60 && this.player.x < 60
-    ){
-      console.log('u dead');
+      obsInstance.obsPosition > 0 &&
+      obsInstance.obsPosition < 50 &&
+      this.player.x < 65
+    ) {
+      alert('u dead');
+      console.log("u dead");
       // location.href = "gameover.html";
     }
   }
@@ -48,7 +50,6 @@ class Game {
       this.obstacle.shift();
     }
   }
-
 }
 
 class Yoshi {
@@ -81,20 +82,20 @@ class Yoshi {
 
   jump() {
     this.timerId = setInterval(() => {
-      if (this.jumpTimer === 6) {
+      if (this.jumpTimer === 5) {
         clearInterval(this.timerId);
         this.downTimerId = setInterval(() => {
           if (this.jumpTimer === 1) {
             clearInterval(this.downTimerId);
             this.isJumping = false;
           }
-          this.x -= 20;
+          this.x -= 25;
           this.jumpTimer--;
           this.domElement.style.bottom = this.x + "px";
         }, 15);
       }
       this.jumpTimer++;
-      this.x += 20;
+      this.x += 25;
       this.domElement.style.bottom = this.x + "px";
     }, 15);
   }
@@ -126,6 +127,8 @@ class Obstacle {
 
     const gameElement = document.getElementById("container");
     gameElement.appendChild(this.domElement);
+
+    this.randomObstacle = Math.floor(Math.random() * 4000) + 1;
   }
 
   slideLeft() {
@@ -133,5 +136,6 @@ class Obstacle {
     this.domElement.style.left = this.obsPosition + "px";
   }
 }
+
 const game = new Game();
 game.start();
