@@ -20,6 +20,7 @@ h1 {
   font-size: 100px;
 
   background: linear-gradient(90deg, #02c39a, #f441a5, #ffeb3b, #02c39a);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -111,6 +112,7 @@ a {
 
 }
 
+/* audio */
 audio {
   display: none;
 }

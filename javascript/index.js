@@ -62,6 +62,8 @@ class Game {
       obsInstance.obsPosition < 50 &&
       this.player.x < 65
     ) {
+      clearInterval(this.gameInterval);
+
       // display timer and score when game is over
       this.gameDiv = document.getElementById('game')
       this.gameoverElement = document.getElementById("gameover");
@@ -72,13 +74,11 @@ class Game {
       this.gameoverScore.innerText = `You scored: ${this.score}`;
       this.gameoverTime.innerText = this.displayTimer;
 
-      clearTimeout(this.gameInterval)
-
       this.gameDiv.remove();
       this.gameoverElement.removeAttribute('hidden');
 
       // game over audio
-      const audio = new Audio('../audio/gameover.mp3');
+      const audio = new Audio('./audio/gameover.mp3');
       audio.play();
     }
   }
