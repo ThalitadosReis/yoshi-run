@@ -2,6 +2,13 @@ class Game {
   constructor() {
     this.player = null;
     this.obstacle = [];
+
+    this.timeElement = document.getElementById("time");
+    this.scoreElement = document.querySelector("#score span");
+    this.intervalId = null;
+    this.currentTime = 0;
+    this.score = 0;
+
     this.randomObstacle = 1000;
   }
 
@@ -16,8 +23,8 @@ class Game {
     }, this.randomObstacle);
 
     setTimeout(() => {
-      this.randomObstacle = Math.floor((Math.random() * 500) + 250)
-    }, 3500);
+      this.randomObstacle = Math.floor(Math.random() * (500 - 2000) + 500);
+    }, 1000);
 
     // update obstacle
     setInterval(() => {
@@ -27,6 +34,40 @@ class Game {
         this.removeObstacle(obsInstance); // remove obstacle
       });
     }, 15);
+
+    // time tracker
+    setInterval(() => {
+      // this.minutes = Math.floor(this.currentTime / 6000);
+      // this.seconds = Math.floor(this.currentTime % 6000 / 100);
+      // this.centiseconds = (Math.floor(this.currentTime) % 6000) % 100;
+  
+      // this.currentTime = `${this.minutes}:${this.seconds}.${this.centiseconds}`
+
+      this.currentTime++;
+      this.timeElement.innerText = this.currentTime;
+    }, 1000);
+
+}
+
+  detectCollision(obsInstance) {
+    if (
+      obsInstance.obsPosition > 0 &&
+      obsInstance.obsPosition < 50 &&
+      this.player.x < 65
+    ) {
+      // location.href = "gameover.html";
+    }
+  }
+
+  removeObstacle(obsInstance) {
+    if (obsInstance.obsPosition <= 0 - obsInstance.width) {
+      obsInstance.domElement.remove();
+      this.obstacle.shift();
+
+      // for every obstable cleared - score++;
+      this.score++;
+      this.scoreElement.innerText = this.score;
+    }
   }
 
   control() {
@@ -37,28 +78,11 @@ class Game {
     });
   }
 
-  detectCollision(obsInstance) {
-    if (
-      obsInstance.obsPosition > 0 &&
-      obsInstance.obsPosition < 50 &&
-      this.player.x < 65
-    ) {
-      alert('u dead');
-      // location.href = "gameover.html";
-    }
-  }
-
-  removeObstacle(obsInstance) {
-    if (obsInstance.obsPosition <= 0 - obsInstance.width) {
-      obsInstance.domElement.remove();
-      this.obstacle.shift();
-    }
-  }
 }
 
 class Yoshi {
   constructor() {
-    this.width = 60;
+    this.width = 64;
     this.height = 60;
     this.x = 25;
     this.l = 0;
@@ -77,8 +101,7 @@ class Yoshi {
     this.domElement.style.bottom = this.x + "px";
     this.domElement.style.left = this.l + "px";
     this.domElement.style.position = "absolute";
-    this.domElement.style.backgroundImage = "url('img/yoshi.jpg')";
-    this.domElement.style.backgroundSize = "60px 60px";
+    this.domElement.style.backgroundImage = "url('img/yoshi.png')";
 
     const gameElement = document.getElementById("container");
     gameElement.appendChild(this.domElement);
@@ -86,7 +109,7 @@ class Yoshi {
 
   jump() {
     this.timerId = setInterval(() => {
-      if (this.jumpTimer === 5) {
+      if (this.jumpTimer === 4) {
         clearInterval(this.timerId);
         this.downTimerId = setInterval(() => {
           if (this.jumpTimer === 1) {
@@ -96,23 +119,23 @@ class Yoshi {
           this.x -= 25;
           this.jumpTimer--;
           this.domElement.style.bottom = this.x + "px";
-        }, 25);
+        }, 30);
       }
       this.jumpTimer++;
       this.x += 25;
       this.domElement.style.bottom = this.x + "px";
-    }, 25);
+    }, 30);
   }
 }
 
 class Obstacle {
   constructor() {
-    this.width = 34;
-    this.height = 55;
+    this.width = 30;
+    this.height = 60;
     this.x = 25;
     this.r = 0;
 
-    this.obsPosition = 676; // container size less obstacle width
+    this.obsPosition = 670; // container size less obstacle width
 
     this.domElement = null;
     this.createDomElement();
@@ -126,8 +149,7 @@ class Obstacle {
     this.domElement.style.bottom = this.x + "px";
     this.domElement.style.right = this.r + "px";
     this.domElement.style.position = "absolute";
-    this.domElement.style.backgroundImage = "url('img/piranha.jpg')";
-    this.domElement.style.backgroundSize = "33px 55px";
+    this.domElement.style.backgroundImage = "url('img/piranha.png')";
 
     const gameElement = document.getElementById("container");
     gameElement.appendChild(this.domElement);
@@ -146,4 +168,4 @@ game.start();
 //   if(e.code === "Enter"){
 //     game.start();
 //   }
-// });
+// }, {once: true});
