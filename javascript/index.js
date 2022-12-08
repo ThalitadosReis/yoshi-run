@@ -105,7 +105,7 @@ class Yoshi {
     this.domElement.style.bottom = this.x + "px";
     this.domElement.style.left = this.l + "px";
     this.domElement.style.position = "absolute";
-    this.domElement.style.backgroundImage = "url('img/yoshi.png')";
+    this.domElement.style.backgroundImage = "url('/img/yoshi.png')";
 
     const gameElement = document.getElementById("container");
     gameElement.appendChild(this.domElement);
@@ -153,7 +153,7 @@ class Obstacle {
     this.domElement.style.bottom = this.x + "px";
     this.domElement.style.right = this.r + "px";
     this.domElement.style.position = "absolute";
-    this.domElement.style.backgroundImage = "url('img/piranha.png')";
+    this.domElement.style.backgroundImage = "url('/img/piranha.png')";
 
     const gameElement = document.getElementById("container");
     gameElement.appendChild(this.domElement);
