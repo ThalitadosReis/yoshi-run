@@ -34,6 +34,7 @@ hr {
   margin: 20px auto;
 }
 
+/* link button - to the game */
 .game-link button {
   background-color: #f6fff8;
   display: flex;
@@ -51,6 +52,8 @@ a {
   letter-spacing: 5px;
 }
 
+
+/* how to play */
 ul li {
   color: #000814;
   font-size: 20px;
@@ -58,8 +61,7 @@ ul li {
   list-style: none;
 }
 
-/* tag container - the game */
-
+/* tag container - in the game */
 #container {
   position: relative;
   padding: 0;
@@ -67,7 +69,6 @@ ul li {
   display: block;
 
   overflow: hidden; 
-  /* to remove the overflow of the obstacle */
 
   width: 700px;
   height: 250px;
@@ -81,20 +82,17 @@ ul li {
 
 #time {
   color: #000814;
-  font-size: 20px;
-  font-weight: 1000;
 
   position: absolute;
-  top: 5px;
-  left: 15px;
+  top: 10px;
+  right: 15px;
 }
 
 #score {
   color: #f6fff8;
-  font-size: 20px;
-  font-weight: 900;
+  font-weight: bold;
 
   position: absolute;
-  top: 30px;
+  top: 10px;
   left: 15px;
 }
