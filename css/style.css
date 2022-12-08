@@ -11,10 +11,7 @@ body {
   padding: 0;
 }
 
-ul,
-h1,
-h2,
-p {
+ul, h1, h2, p {
   text-align: center;
   color: #000814;
 }
@@ -35,6 +32,14 @@ hr {
   background: linear-gradient(90deg, #02c39a, #f441a5, #ffeb3b, #02c39a);
   width: 55%;
   margin: 20px auto;
+}
+
+/* how to play */
+ul li {
+  color: #000814;
+  font-size: 20px;
+  text-transform: uppercase;
+  list-style: none;
 }
 
 /* link button - to the game */
@@ -72,14 +77,6 @@ a {
   letter-spacing: 5px;
 }
 
-/* how to play */
-ul li {
-  color: #000814;
-  font-size: 20px;
-  text-transform: uppercase;
-  list-style: none;
-}
-
 /* tag container - in the game */
 #container {
   position: relative;
@@ -104,4 +101,16 @@ ul li {
   position: absolute;
   top: 10px;
   left: 15px;
+}
+
+/* tag game over - in the game */
+#display-result {
+  color: #000814;
+  font-size: 30px;
+  text-align: center;
+
+}
+
+audio {
+  display: none;
 }
