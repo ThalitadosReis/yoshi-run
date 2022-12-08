@@ -11,47 +11,66 @@ body {
   padding: 0;
 }
 
-.game-link a,
 ul,
 h1,
 h2,
 p {
   text-align: center;
-  color: #43aa8b;
+  color: #000814;
 }
 
 h1 {
   font-size: 100px;
-  font-weight: 300;
+
+  background: linear-gradient(90deg, #02c39a, #f441a5, #ffeb3b, #02c39a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 hr {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid #6b9080;
+  border-top: 1px solid;
+  background: linear-gradient(90deg, #02c39a, #f441a5, #ffeb3b, #02c39a);
   width: 55%;
   margin: 20px auto;
 }
 
 /* link button - to the game */
-.game-link button {
-  background-color: #f6fff8;
+button {
   display: flex;
   align-items: center;
 
   margin: 50px auto;
-  padding: 15px 50px;
+  padding: 20px 50px;
 
-  border: 3.5px solid #43aa8b;
+  border: none;
+
+  background: linear-gradient(90deg, #02c39a, #f441a5, #ffeb3b, #02c39a);
+  background-size: 300%;
   border-radius: 10px;
 }
 
+@keyframes animation {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 400%;
+  }
+}
+
+button:hover {
+  animation: animation 8s linear infinite;
+  border: none;
+}
+
 a {
+  color: #f6fff8;
   text-decoration: none;
   letter-spacing: 5px;
 }
-
 
 /* how to play */
 ul li {
@@ -68,29 +87,19 @@ ul li {
   margin: auto;
   display: block;
 
-  overflow: hidden; 
+  overflow: hidden;
 
   width: 700px;
   height: 250px;
 
-  border: 7px solid #43aa8b;
   border-radius: 15px;
 
-  background-image: url('/img/background.jpg');
+  background-image: url("../img/background.jpg");
   background-size: 700px 250px;
 }
 
-#time {
-  color: #000814;
-
-  position: absolute;
-  top: 10px;
-  right: 15px;
-}
-
-#score {
+.tracker {
   color: #f6fff8;
-  font-weight: bold;
 
   position: absolute;
   top: 10px;
