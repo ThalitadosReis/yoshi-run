@@ -8,23 +8,12 @@ class Game {
     this.intervalId = null;
     this.currentTime = 0;
     this.score = 0;
-
-    this.randomObstacle = 1000;
   }
 
   start() {
     this.player = new Yoshi();
+    this.createObstacles();
     this.control();
-    
-    // create obstacle randomly
-    setInterval(() => {
-      const newObstacle = new Obstacle();
-      this.obstacle.push(newObstacle);
-    }, this.randomObstacle);
-
-    setTimeout(() => {
-      this.randomObstacle = Math.floor(Math.random() * (500 - 2000) + 500);
-    }, 1000);
 
     // update obstacle
     setInterval(() => {
@@ -37,17 +26,33 @@ class Game {
 
     // time tracker
     setInterval(() => {
-      // this.minutes = Math.floor(this.currentTime / 6000);
-      // this.seconds = Math.floor(this.currentTime % 6000 / 100);
-      // this.centiseconds = (Math.floor(this.currentTime) % 6000) % 100;
-  
-      // this.currentTime = `${this.minutes}:${this.seconds}.${this.centiseconds}`
-
       this.currentTime++;
-      this.timeElement.innerText = this.currentTime;
-    }, 1000);
 
-}
+      const minutes = Math.floor(this.currentTime / 6000);
+      const seconds = Math.floor((this.currentTime % 6000) / 100);
+      const milliseconds = (Math.floor(this.currentTime) % 6000) % 100;
+
+      this.timeElement.innerText = `${this.computeTwoDigitNumber(minutes)}:${this.computeTwoDigitNumber(seconds)}.${this.computeTwoDigitNumber(milliseconds)}`
+    }, 10);
+  }
+
+  computeTwoDigitNumber(value) {
+    let stringValue = value.toString();
+    if (stringValue.length > 1) {
+      return stringValue;
+    } else {
+      return `0${stringValue}`;
+    }
+  }
+
+  createObstacles() {
+    const randomTime = Math.random() * 2000;
+    setTimeout(() => {
+      const newObstacle = new Obstacle();
+      this.obstacle.push(newObstacle);
+      this.createObstacles();
+    }, 500 + randomTime);
+  }
 
   detectCollision(obsInstance) {
     if (
@@ -77,7 +82,6 @@ class Game {
       }
     });
   }
-
 }
 
 class Yoshi {
@@ -101,7 +105,7 @@ class Yoshi {
     this.domElement.style.bottom = this.x + "px";
     this.domElement.style.left = this.l + "px";
     this.domElement.style.position = "absolute";
-    this.domElement.style.backgroundImage = "url('img/yoshi.png')";
+    this.domElement.style.backgroundImage = "url('/img/yoshi.png')";
 
     const gameElement = document.getElementById("container");
     gameElement.appendChild(this.domElement);
@@ -149,7 +153,7 @@ class Obstacle {
     this.domElement.style.bottom = this.x + "px";
     this.domElement.style.right = this.r + "px";
     this.domElement.style.position = "absolute";
-    this.domElement.style.backgroundImage = "url('img/piranha.png')";
+    this.domElement.style.backgroundImage = "url('/img/piranha.png')";
 
     const gameElement = document.getElementById("container");
     gameElement.appendChild(this.domElement);
