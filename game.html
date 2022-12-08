@@ -9,17 +9,39 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <header>
-      <h1>yoshi<img src="./img/piranha-h1.png" />run</h1>
-    </header>
 
-    <div id="container">
+    <div id="game">
+      <header>
+        <h1>yoshi<img src="./img/piranha-h1.png" />run</h1>
+      </header>
 
-      <div class="tracker">
-        <div id="score">score: <span>0</span></div>
-        <div id="time"><span>0</span></div>
+      <div id="container">
+        <div class="tracker">
+          <div id="score">score: <span>0</span></div>
+          <div id="time"><span>00:00.00</span></div>
+        </div>
       </div>
 
+      <audio controls autoplay>
+        <source src="/audio/game.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+
+    <div hidden id="gameover">
+      <header>
+        <h1>Game over</h1>
+      </header>
+
+      <div id="display-result">
+        <div id="gameoverScore"><span>0</span></div>
+        <div id="gameoverTime"><span>00:00.00</span></div>
+      </div>
+
+      <section class="game-link">
+        <button>
+          <a href="game.html">TRY AGAIN</a>
+        </button>
+      </section>
     </div>
 
     <script src="javascript/index.js"></script>
