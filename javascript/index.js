@@ -5,7 +5,7 @@ class Game {
 
     this.timeElement = document.getElementById("time");
     this.scoreElement = document.querySelector("#score span");
-    this.intervalId = null;
+
     this.currentTime = 0;
     this.score = 0;
   }
@@ -16,7 +16,7 @@ class Game {
     this.control();
 
     // update obstacle
-    setInterval(() => {
+    this.gameInterval = setInterval(() => {
       this.obstacle.forEach((obsInstance) => {
         obsInstance.slideLeft(); // move obstacle
         this.detectCollision(obsInstance); // detect collision
@@ -32,7 +32,9 @@ class Game {
       const seconds = Math.floor((this.currentTime % 6000) / 100);
       const milliseconds = (Math.floor(this.currentTime) % 6000) % 100;
 
-      this.timeElement.innerText = `${this.computeTwoDigitNumber(minutes)}:${this.computeTwoDigitNumber(seconds)}.${this.computeTwoDigitNumber(milliseconds)}`
+      this.displayTimer = `${this.computeTwoDigitNumber(minutes)}:${this.computeTwoDigitNumber(seconds)}.${this.computeTwoDigitNumber(milliseconds)}`;
+
+      this.timeElement.innerText = this.displayTimer;
     }, 10);
   }
 
@@ -60,7 +62,24 @@ class Game {
       obsInstance.obsPosition < 50 &&
       this.player.x < 65
     ) {
-      location.href = "gameover.html";
+      // display timer and score when game is over
+      this.gameDiv = document.getElementById('game')
+      this.gameoverElement = document.getElementById("gameover");
+
+      this.gameoverScore = document.getElementById('gameoverScore');
+      this.gameoverTime = document.getElementById('gameoverTime');
+
+      this.gameoverScore.innerText = `You scored: ${this.score}`;
+      this.gameoverTime.innerText = this.displayTimer;
+
+      clearTimeout(this.gameInterval)
+
+      this.gameDiv.remove();
+      this.gameoverElement.removeAttribute('hidden');
+
+      // game over audio
+      const audio = new Audio('../audio/gameover.mp3');
+      audio.play();
     }
   }
 
@@ -78,7 +97,9 @@ class Game {
   control() {
     document.addEventListener("keydown", (e) => {
       if (e.code === "Space") {
-        this.player.jump();
+        if(this.player.x === 25){
+          this.player.jump();
+        }
       }
     });
   }
@@ -123,7 +144,7 @@ class Yoshi {
           this.x -= 25;
           this.jumpTimer--;
           this.domElement.style.bottom = this.x + "px";
-        }, 30);
+        }, 35);
       }
       this.jumpTimer++;
       this.x += 25;
@@ -166,9 +187,4 @@ class Obstacle {
 }
 
 const game = new Game();
-
-document.addEventListener("keydown", (e) => {
-  if(e.code === "Enter"){
-    game.start();
-  }
-}, {once: true});
+game.start();
