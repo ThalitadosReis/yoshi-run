@@ -48,12 +48,12 @@ class Game {
   }
 
   createObstacles() {
-    const randomTime = Math.random() * 2000;
+    const randomTime = Math.random() * 1000;
     setTimeout(() => {
       const newObstacle = new Obstacle();
       this.obstacle.push(newObstacle);
       this.createObstacles();
-    }, 500 + randomTime);
+    }, 475 + randomTime);
   }
 
   detectCollision(obsInstance) {
@@ -71,7 +71,7 @@ class Game {
       this.gameoverScore = document.getElementById('gameoverScore');
       this.gameoverTime = document.getElementById('gameoverTime');
 
-      this.gameoverScore.innerText = `You scored: ${this.score}`;
+      this.gameoverScore.innerText = `Score: ${this.score}`;
       this.gameoverTime.innerText = this.displayTimer;
 
       this.gameDiv.remove();
@@ -134,7 +134,7 @@ class Yoshi {
 
   jump() {
     this.timerId = setInterval(() => {
-      if (this.jumpTimer === 4) {
+      if (this.jumpTimer === 5) {
         clearInterval(this.timerId);
         this.downTimerId = setInterval(() => {
           if (this.jumpTimer === 1) {
@@ -144,7 +144,7 @@ class Yoshi {
           this.x -= 25;
           this.jumpTimer--;
           this.domElement.style.bottom = this.x + "px";
-        }, 35);
+        }, 30);
       }
       this.jumpTimer++;
       this.x += 25;
