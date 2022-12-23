@@ -100,8 +100,14 @@ a {
   color: #f6fff8;
 
   position: absolute;
-  top: 10px;
+  top: 15px;
   left: 15px;
+}
+
+#time {
+  text-align: center;
+  position: relative;
+  top: 15px;
 }
 
 /* tag game over - in the game */

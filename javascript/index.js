@@ -3,11 +3,13 @@ class Game {
     this.player = null;
     this.obstacle = [];
 
-    this.timeElement = document.getElementById("time");
     this.scoreElement = document.querySelector("#score span");
+    this.levelElement = document.querySelector("#level span");
+    this.timeElement = document.getElementById("time");
 
-    this.currentTime = 0;
     this.score = 0;
+    this.level = 1;
+    this.currentTime = 0;
   }
 
   start() {
@@ -64,14 +66,16 @@ class Game {
     ) {
       clearInterval(this.gameInterval);
 
-      // display timer and score when game is over
+      // display timer, score  and level when the game is over
       this.gameDiv = document.getElementById('game')
       this.gameoverElement = document.getElementById("gameover");
 
       this.gameoverScore = document.getElementById('gameoverScore');
+      this.gameoverLevel = document.getElementById('gameoverLevel');
       this.gameoverTime = document.getElementById('gameoverTime');
 
-      this.gameoverScore.innerText = `Score: ${this.score}`;
+      this.gameoverScore.innerText = `You have jumped over ${this.score} obstacles`;
+      this.gameoverLevel.innerText = `Level: ${this.level}`;
       this.gameoverTime.innerText = this.displayTimer;
 
       this.gameDiv.remove();
@@ -91,6 +95,14 @@ class Game {
       // for every obstable cleared - score++;
       this.score++;
       this.scoreElement.innerText = this.score;
+
+      // for every 10 obstacle cleared - level++ and obstacle sliding faster
+      if(this.score %  10 === 0){
+        this.level++;
+        this.levelElement.innerText = `L${this.level}`;
+        
+        this.obsPosition *= 2;
+      }
     }
   }
 
@@ -134,7 +146,7 @@ class Yoshi {
 
   jump() {
     this.timerId = setInterval(() => {
-      if (this.jumpTimer === 5) {
+      if (this.jumpTimer === 6 ) {
         clearInterval(this.timerId);
         this.downTimerId = setInterval(() => {
           if (this.jumpTimer === 1) {
@@ -144,12 +156,12 @@ class Yoshi {
           this.x -= 25;
           this.jumpTimer--;
           this.domElement.style.bottom = this.x + "px";
-        }, 30);
+        }, 25);
       }
       this.jumpTimer++;
       this.x += 25;
       this.domElement.style.bottom = this.x + "px";
-    }, 30);
+    }, 25);
   }
 }
 
@@ -181,7 +193,7 @@ class Obstacle {
   }
 
   slideLeft() {
-    this.obsPosition -= 5;
+    this.obsPosition -= 7;
     this.domElement.style.left = this.obsPosition + "px";
   }
 }
