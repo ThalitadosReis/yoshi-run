@@ -14,7 +14,7 @@ It has a very simple and clean design. You just have to click on the button in t
 
 In order to play Yoshi Run, click on the "LET'S PLAY" button and use the Space Key to jump. 
 
-*The game will automatically start when you click on the button, so be ready to start jumping the obstacles.*
+*The game will automatically start once you click on the button, so be ready to start jumping the obstacles.*
 
 
 ## Demo
