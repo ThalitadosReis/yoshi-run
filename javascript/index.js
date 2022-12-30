@@ -4,11 +4,9 @@ class Game {
     this.obstacle = [];
 
     this.scoreElement = document.querySelector("#score span");
-    this.levelElement = document.querySelector("#level span");
     this.timeElement = document.getElementById("time");
 
     this.score = 0;
-    this.level = 1;
     this.currentTime = 0;
   }
 
@@ -55,7 +53,7 @@ class Game {
       const newObstacle = new Obstacle();
       this.obstacle.push(newObstacle);
       this.createObstacles();
-    }, 475 + randomTime);
+    }, 450 + randomTime);
   }
 
   detectCollision(obsInstance) {
@@ -66,16 +64,14 @@ class Game {
     ) {
       clearInterval(this.gameInterval);
 
-      // display timer, score  and level when the game is over
+      // display timer and score when the game is over
       this.gameDiv = document.getElementById('game')
       this.gameoverElement = document.getElementById("gameover");
 
       this.gameoverScore = document.getElementById('gameoverScore');
-      this.gameoverLevel = document.getElementById('gameoverLevel');
       this.gameoverTime = document.getElementById('gameoverTime');
 
       this.gameoverScore.innerText = `You have jumped over ${this.score} obstacles`;
-      this.gameoverLevel.innerText = `Level: ${this.level}`;
       this.gameoverTime.innerText = this.displayTimer;
 
       this.gameDiv.remove();
@@ -95,14 +91,6 @@ class Game {
       // for every obstable cleared - score++;
       this.score++;
       this.scoreElement.innerText = this.score;
-
-      // for every 10 obstacle cleared - level++ and obstacle sliding faster
-      if(this.score %  10 === 0){
-        this.level++;
-        this.levelElement.innerText = `L${this.level}`;
-        
-        this.obsPosition *= 2;
-      }
     }
   }
 
